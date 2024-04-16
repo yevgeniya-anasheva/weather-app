@@ -1,0 +1,17 @@
+<% if(weatherType === "Clouds" || weatherType === "Mist") { %>
+  <% if((locals.currHours) && (currHours < sunrise || currHours > sunset)) { %>
+    <img class="weather-icon" src="/images/night-cloudy.svg" alt="night cloudy forecast icon">
+  <% } else { %>
+    <img class="weather-icon" src="/images/cloudy-forecast.svg" alt="cloudy forecast icon">
+  <% } %>
+<% } else if (weatherType === "Rain") { %>
+  <img class="weather-icon" src="/images/rain-forecast.svg" alt="rain forecast icon">
+<% } else if(weatherType === "Clear") { %>
+  <%  if((locals.currHours) && (currHours < sunrise || currHours > sunset)) { %>
+    <img class="weather-icon" src="/images/night-clear.svg" alt="night clear icon">
+  <% } else { %>
+    <img class="weather-icon" src="/images/sun-season.svg" alt="sunny">
+  <% } %>
+<% } else if(weatherType === "Snow") { %>
+  <img class="weather-icon" src="/images/snowing-forecast.svg" alt="snow forecast icon">
+<% } %>

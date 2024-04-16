@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/main.css">
+  <title>Weather App</title>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <h4>Weather Now</h4>
+        </a>
+        <form action="/" method="post" class="d-flex" role="search">
+          <!-- TODO: popover for search bar -->
+          <input class="form-control me-2" type="search" name="location" placeholder="Enter city or zip-code" aria-label="Search">
+          <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+  </header>
+  <section id="weather-main">
+    <div class="container-fluid">
+      <div class="card mb-3">
+        <div class="card-header">
+          CURRENT WEATHER - <%= currLocation %>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= currDateTime %></h5>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="forecast-container">
+                <div class="temp"><%= currTemp %>°
+                  <span class="units">C</span>
+                </div>
+                <%- include("partials/weathericon.ejs", { weatherType: currStatus, currHours: currHours, sunrise: sunrise, sunset: sunset }, locals) %>
+              </div>
+            </div>
+            <div class="col-lg-6 right-column">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><div class="current-weather-list-item">Feels like: </div><%= currFeelsLike %>°</li>
+                <li class="list-group-item"><div class="current-weather-list-item">Wind: </div><%= currWind %>m/s</li>
+                <li class="list-group-item"><div class="current-weather-list-item">Humidity: </div><%= currHumidity %>%</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-3">
+        <div class="card-header">
+          DAILY FORECAST
+        </div>
+        <div class="card-body daily-forecast">
+          <ul class="list-group list-group-flush">
+            <% dailyWeather
+              .filter((weatherFor1PM) => new Date(weatherFor1PM.dt * 1000).getHours() === 13 )
+              .forEach(weatherForTheDay => { %>
+              <li class="list-group-item daily-forecast-list">
+                <% let dayOfTheWeek %>
+                <% const date = new Date(weatherForTheDay.dt * 1000); %>
+                <% switch (date.getDay()) {
+                   case 0: %>
+                  <% dayOfTheWeek = "SUN"; %>    
+                  <% break; 
+                   case 1: %>
+                  <% dayOfTheWeek="MON"; %>
+                  <% break; 
+                   case 2: %>
+                  <% dayOfTheWeek="TUE" ; %>
+                  <% break; 
+                   case 3: %>
+                  <% dayOfTheWeek="WED" ; %>
+                  <% break;
+                   case 4: %>
+                  <% dayOfTheWeek="THU" ; %>
+                  <% break; 
+                   case 5: %>
+                  <% dayOfTheWeek="FRI" ; %>
+                  <% break;
+                   case 6: %>
+                  <% dayOfTheWeek="SAT" ; %>
+                  <% break; %>
+                <% } %>
+                <div class="day-of-the-week"><%= dayOfTheWeek %> <div class="daily-forecast-date"><%= date.getMonth() + 1 + "/" + date.getDate() %></div></div>
+                <%- include("partials/weathericon.ejs", { weatherType: weatherForTheDay.weather[0].main, currHours: null }) %>
+                <div class="daily-forecast-temp-max"><%= dailyMaxTemperatures.get(date.getDay()) %>°</div>
+                <div class="daily-forecast-temp-min"><%= dailyMinTemperatures.get(date.getDay()) %>°</div>
+                <div class="daily-forecast-description"><%= weatherForTheDay.weather[0].description %></div>
+                <div class="daily-forecast-precipitation">
+                  <img class="precipitation-icon" src="/images/drop.svg" alt="drop precipitation icon"><%= Math.round(weatherForTheDay.pop * 100) %>%
+                </div>
+              </li>
+            <% }) %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+
+</html>

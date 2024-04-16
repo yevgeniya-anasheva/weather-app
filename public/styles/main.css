@@ -1,0 +1,128 @@
+body {
+  background-color: #afccd4;
+  font-family: 'Merriweather Sans', sans-serif;
+  margin: 0;
+}
+h4, h5 {
+  margin-bottom: 0;
+}
+.current-weather-list-item {
+  display: inline-block;
+  width: 6rem;
+}
+.daily-forecast-date {
+  color: #7b8e94;
+  font-size: 0.75rem;
+  font-weight: normal;
+  text-align: center;
+}
+.daily-forecast-description {
+  font-weight: 400;
+  overflow: visible;
+}
+.daily-forecast-list {
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+}
+.daily-forecast-precipitation {
+  text-align: left;
+  position: absolute;
+  right: 15px;
+}
+.daily-forecast-temp-max {
+  font-size: 2rem;
+  letter-spacing: -0.12rem;
+  margin-left: 15px;
+  text-align: right;
+  width: 4rem;
+}
+.daily-forecast-temp-min {
+  color: #365486;
+  font-size: 1.5rem;
+  letter-spacing: -0.12rem;
+  margin: 0 10px;
+  width: 3.5rem;
+}
+.day-of-the-week {
+  padding-right: 2%;
+  text-align: center;
+  width: 5rem;
+}
+.forecast-container {
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+}
+.precipitation-icon {
+  height: 15px;
+  margin-right: 10px;
+}
+.temp {
+  font-size: 5rem;
+  font-weight: 700;
+  letter-spacing: -0.3rem;
+  padding: 2%;
+  white-space: nowrap;
+}
+.units {
+  color: #365486;
+  font-size: 1.25rem;
+  margin-left: -30px;
+}
+.weather-icon {
+  height: 40px;
+}
+.forecast-container .weather-icon {
+  height: 70px;
+  margin-left: 1rem;
+}
+
+/* Bootstrap components */
+
+.btn:hover {
+  background-color: #7FC7D9;
+  border-color: #365486;
+}
+.btn-primary {
+  background-color: #365486;
+  border-color: #7FC7D9;
+}
+.card {
+  color: #0F1035;
+}
+.card-body.daily-forecast {
+  padding: 0;
+}
+.card-header {
+  background-color: white;
+  color: #7b8e94;
+}
+.card-title {
+  margin: 0;
+}
+.container-fluid {
+  padding: 1% 25%;
+}
+.daily-forecast .list-group-item {
+  font-weight: 700;
+  padding: 1rem;
+}
+.navbar {
+  color: #DCF2F1;
+  background-color: #0F1035;
+  font-family: 'Roboto', sans-serif;
+}
+.navbar-brand {
+  color: #DCF2F1;
+}
+@media (max-width: 1400px) {
+  .container-fluid {
+    padding: 1% 18%;
+  }
+}
+@media (max-width: 993px) {
+  .container-fluid {
+    padding: 1% 13%;
+  }
+}
